@@ -19,7 +19,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 withSonarQubeEnv('SonarQube') {
-                    sh 'mvn clean package sonar:sonar -Dsonar.language=mule4'
+                    sh 'mvn clean package sonar:sonar -Dsonar.language=mule4 -Dsonar.sources=src/main/mule'
                 }
             }
         }
