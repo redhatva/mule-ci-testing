@@ -18,7 +18,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'mvn clean package sonar:sonar'
+                withSonarQubeEnv('SonarQube') {
+                    sh 'mvn clean package sonar:sonar'
+                }
             }
         }
         stage('Test') {
