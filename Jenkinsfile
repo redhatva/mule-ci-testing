@@ -23,6 +23,20 @@ pipeline {
                 }
             }
         }
+
+  stage("Quality Gate"){
+      steps {
+          timeout(time: 600, unit: 'SECONDS') {
+              script{
+                  def qg = waitForQualityGate()
+                  if (qg.status != 'OK') {
+                      error "Problem with SonarQube Quality Gate - status = ${qg.status}"
+                  }
+              }
+          } 
+      }
+  }
+
         stage('Test') {
             steps {
                 echo 'Testing..'
