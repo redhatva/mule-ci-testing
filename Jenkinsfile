@@ -16,6 +16,9 @@ pipeline {
 
 		echo 'Pulling...' + env.BRANCH_NAME
 		echo 'Show me all ENV = ' + env
+		env.getEnvironment()
+		sh 'env'
+		sh 'printenv'
             }
         }        
 
