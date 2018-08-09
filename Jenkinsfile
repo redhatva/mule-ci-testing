@@ -15,10 +15,6 @@ pipeline {
                 ''' 
 
 		echo 'Pulling...' + env.BRANCH_NAME
-		echo 'Show me all ENV = ' + env
-		script {
-			env.getEnvironment()
-		}
 
 		sh 'env'
 		sh 'printenv'
