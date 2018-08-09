@@ -15,7 +15,7 @@ pipeline {
                 ''' 
 
 		echo 'Pulling...' + env.BRANCH_NAME
-		echo 'OR ' + scm.branches[0].name
+		echo 'Show me all ENV = ' + env
             }
         }        
 
