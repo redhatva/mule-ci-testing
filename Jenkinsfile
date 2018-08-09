@@ -13,7 +13,9 @@ pipeline {
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                 ''' 
-		echo branch
+
+		echo 'Pulling...' + env.BRANCH_NAME
+		echo 'OR ' + scm.branches[0].name
             }
         }        
 
