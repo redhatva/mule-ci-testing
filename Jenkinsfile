@@ -21,9 +21,8 @@ pipeline {
             }
         }        
 
-        stage('Build') {
+        stage('Build and Test') {
             steps {
-                echo 'Building..'
                 withSonarQubeEnv('SonarQube') {
                     sh 'mvn clean package sonar:sonar -Dsonar.language=mule4 -Dsonar.sources=src/main/mule'
                 }
@@ -43,16 +42,32 @@ pipeline {
       		}
   	}
 
-        stage('Test') {
+        stage('Deploy to Development') {
+	    when {
+                branch 'develop'
+            }
             steps {
-                echo 'Testing..'
+                echo 'Deploying to deevlopment...'
             }
         }
 
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+	stage('Deploy to QA') {
+	    when {
+		branch 'release'
+	    }
+	    steps {
+		echo 'Deploying to QA...'
+	    }
+	}
+
+	stage('Deploy to PROD') {
+	    when {
+		branch 'master'
+	    }
+	    steps {
+		echo 'Deploying to PROD...'
+	    }
+	}
+
     }
 }
